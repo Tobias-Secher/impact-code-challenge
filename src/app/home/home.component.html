@@ -11,3 +11,7 @@
 <div class="search">
   <input type="text" placeholder="Search for your favorite brews" />
 </div>
+bla
+<ng-container *ngIf="beers$ | async as beers">
+  {{ beers | json }}
+</ng-container>
