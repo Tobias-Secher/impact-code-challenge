@@ -5,7 +5,7 @@
 }
 
 .banner {
-  --logo-width: 335px;
+  --logo-width: 368px;
   --opacity: 0.5;
   background-image: linear-gradient(
       rgba(0, 0, 0, var(--opacity)),
@@ -18,15 +18,33 @@
   height: 500px;
   position: relative;
   color: white;
-  padding: var(--padding-spacing) 0px 0px var(--padding-spacing);
+  padding: var(--padding-spacing);
+
+  &__logo-wrapper {
+    width: var(--logo-width);
+    text-align: center;
+  }
 
   &__logo {
-    width: var(--logo-width);
+    width: 100%;
   }
   &__subtitle {
-    width: var(--logo-width);
     margin-top: 30px;
-    text-align: center;
+    font-size: 2em;
+  }
+
+  @media (max-width: shared.$breakpoint_md) {
+    &__logo-wrapper {
+      position: absolute;
+      top: var(--padding-spacing);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  @media (max-width: shared.$breakpoint_sm) {
+    &__logo-wrapper {
+      width: clamp(100%, var(--logo-width));
+    }
   }
 }
 
