@@ -1,6 +1,6 @@
 <div class="wrapper">
   <ng-container *ngFor="let beer of beers">
-    <div class="wrapper__beer">
+    <a href="#" class="wrapper__beer">
       <div class="wrapper__beer-icon">
         <img [src]="beer.image_url" />
       </div>
@@ -10,6 +10,6 @@
       </div>
       <div class="wrapper__beer-info">{{ beer.abv }}% abv</div>
       <div class="wrapper__beer-info">{{ beer.ibu }}% ibu</div>
-    </div>
+    </a>
   </ng-container>
 </div>

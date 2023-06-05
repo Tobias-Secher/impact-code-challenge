@@ -19,6 +19,8 @@
   }
 
   &__beer {
+    text-decoration: none;
+    color: inherit;
     background-color: white;
     display: grid;
     cursor: pointer;
