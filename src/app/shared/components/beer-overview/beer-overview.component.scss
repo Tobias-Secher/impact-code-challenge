@@ -9,6 +9,11 @@
   gap: var(--breakpoint-grid_row-gap) var(--breakpoint-grid_row-gap);
   padding: 16px;
 
+  @media (min-width: shared.$breakpoint_md) {
+    --grid-template-columns: 4;
+    --breakpoint-grid_row-gap: 24px;
+  }
+
   @media (max-width: shared.$breakpoint_sm) {
     --grid-template-columns: 2;
     --breakpoint-grid_row-gap: 24px;
