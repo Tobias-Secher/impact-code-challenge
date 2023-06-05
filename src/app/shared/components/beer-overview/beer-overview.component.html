@@ -1,0 +1,15 @@
+<div class="wrapper">
+  <ng-container *ngFor="let beer of beers">
+    <a href="#" class="wrapper__beer">
+      <div class="wrapper__beer-icon">
+        <img [src]="beer.image_url" />
+      </div>
+      <h3 class="wrapper__beer-title">{{ beer.name }}</h3>
+      <div class="wrapper__beer-info--tagline wrapper__beer-info--tagline">
+        {{ beer.tagline }}
+      </div>
+      <div class="wrapper__beer-info">{{ beer.abv }}% abv</div>
+      <div class="wrapper__beer-info">{{ beer.ibu }}% ibu</div>
+    </a>
+  </ng-container>
+</div>
