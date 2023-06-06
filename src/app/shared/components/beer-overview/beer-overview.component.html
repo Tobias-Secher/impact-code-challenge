@@ -1,6 +1,6 @@
 <div class="wrapper">
   <ng-container *ngFor="let beer of beers">
-    <a href="#" class="wrapper__beer">
+    <a href="detail/{{ beer.id }}" class="wrapper__beer">
       <div class="wrapper__beer-icon">
         <img [src]="beer.image_url" />
       </div>
