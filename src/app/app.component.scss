@@ -79,11 +79,9 @@
 .content {
   width: shared.$breakpoint_lg;
   min-height: 100px;
-  background-color: blue;
   margin: 0 auto;
 
   @media (max-width: shared.$breakpoint_lg) {
     width: 100vw;
-    background-color: green;
   }
 }
