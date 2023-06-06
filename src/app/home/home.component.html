@@ -4,7 +4,9 @@
     <input type="text" placeholder="Search for your beer" />
   </form>
 </div>
-
+<ng-container *ngIf="beers$ | async as beers">
+  <app-beer-overview [beers]="beers"></app-beer-overview>
+</ng-container>
 <!-- <div class="banner">
   <div class="banner__logo-wrapper">
     <img
