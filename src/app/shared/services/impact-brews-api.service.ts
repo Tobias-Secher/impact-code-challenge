@@ -21,4 +21,8 @@ export class ImpactBrewsApiService {
       params: new HttpParams().append(this.perPageKey, limit ?? 100),
     });
   }
+
+  getBeer(id: string) {
+    return this.http.get<IBeer[]>(`${environment.apiUrl}/beers/${id}`);
+  }
 }
