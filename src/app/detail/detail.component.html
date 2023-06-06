@@ -1,3 +1,17 @@
-<div class="wrapper">
-  <div class="image"></div>
-</div>
+<ng-container *ngIf="beer">
+  <div class="wrapper">
+    <div class="wrapper__image">
+      <img [src]="beer.image_url" />
+    </div>
+    <div class="wrapper__title">
+      <h1>{{ beer.name }}</h1>
+      <span class="wrapper__info">
+        Abv {{ beer.abv }} | Ibu {{ beer.ibu }} | Ph {{ beer.ph }}
+      </span>
+    </div>
+    <div class="wrapper__desc">
+      <h3>{{ beer.tagline }}</h3>
+      {{ beer.description }}
+    </div>
+  </div>
+</ng-container>
