@@ -1,0 +1,87 @@
+@use "./shared/styles/shared.scss" as shared;
+.nav {
+  --nav-height: 75px;
+  --nav-border-color: #e3e5e4;
+  --nav-border-width: 2px;
+
+  border-bottom: var(--nav-border-width) solid var(--nav-border-color);
+  margin-bottom: 10px;
+  height: 75px;
+  display: grid;
+  grid-template-areas: "logo title menu";
+  grid-template-columns: fit-content(100px) fit-content(150px) auto;
+  color: #424242;
+
+  &__logo {
+    grid-area: logo;
+    height: var(--nav-height);
+    padding: 0px 16px;
+    border-right: var(--nav-border-width) solid var(--nav-border-color);
+    display: flex;
+    align-items: center;
+
+    & img {
+      height: calc(var(--nav-height) - 10px);
+      fill: blue;
+    }
+  }
+
+  &__title {
+    grid-area: title;
+    font-size: 1em;
+    font-weight: 500;
+    align-items: center;
+    padding-left: 16px;
+    display: flex;
+    align-items: center;
+    @media (max-width: shared.$breakpoint_sm) {
+      display: none;
+    }
+  }
+
+  &__menu {
+    grid-area: menu;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    & ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+
+      & li {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+
+        & a {
+          color: inherit;
+          font-size: 1.2em;
+          text-decoration: none;
+          position: relative;
+
+          &:hover::after {
+            content: " ";
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background-color: shared.$primary_color;
+            left: 0;
+            top: 27px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.content {
+  width: shared.$breakpoint_lg;
+  min-height: 100px;
+  margin: 0 auto;
+
+  @media (max-width: shared.$breakpoint_lg) {
+    width: 100vw;
+  }
+}
