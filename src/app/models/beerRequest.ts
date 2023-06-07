@@ -5,4 +5,5 @@ export interface IBeerRequest {
   ibu: number;
   ph: number;
   image_url: string;
+  tagline: string;
 }

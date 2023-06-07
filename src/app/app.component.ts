@@ -11,6 +11,6 @@ export class AppComponent {
   title = 'impact-brews';
 
   constructor() {
-    // this.service.bootstrapBeers()
+    // this.service.bootstrapBeers();
   }
 }

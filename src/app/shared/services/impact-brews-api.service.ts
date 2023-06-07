@@ -75,6 +75,7 @@ export class ImpactBrewsApiService {
         ibu: beer.ibu,
         ph: beer.ph,
         image_url: beer.image_url,
+        tagline: beer.tagline,
       };
     });
     console.log(map);
