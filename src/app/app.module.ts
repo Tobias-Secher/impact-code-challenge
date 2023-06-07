@@ -7,14 +7,25 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BeerOverviewComponent } from './shared/components/beer-overview/beer-overview.component';
 import { DetailComponent } from './detail/detail.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, BeerOverviewComponent, DetailComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, provideFirebaseApp(() => initializeApp(environment.firebase)), provideAuth(() => getAuth()), provideFirestore(() => getFirestore())],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    BeerOverviewComponent,
+    DetailComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

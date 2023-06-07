@@ -7,5 +7,4 @@ export const environment = {
     authDomain: 'impact-635e1.firebaseapp.com',
     messagingSenderId: '718686556108',
   },
-  apiUrl: 'https://api.punkapi.com/v2',
 };
