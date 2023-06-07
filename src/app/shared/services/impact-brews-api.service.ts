@@ -11,9 +11,18 @@ import {
   orderBy,
   limit as docLimit,
   where,
+  runTransaction,
 } from '@angular/fire/firestore';
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  list,
+  getDownloadURL,
+} from '@angular/fire/storage';
 import { IBeerRequest, IBeerRequestBase } from 'src/app/models/beerRequest';
 import { Beer } from 'brewdog-js';
+import { transition } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root',
@@ -75,8 +84,29 @@ export class ImpactBrewsApiService {
     });
   }
 
-  addBeer(beer: IBeerRequest) {
-    addDoc(this.beerColRef, this.buildRequest(beer));
+  async addBeer(beer: IBeerRequest, image?: File) {
+    try {
+      const imageUrl = image ? await this.uploadImage(image) : beer.image_url;
+      const newBeer = await addDoc(
+        this.beerColRef,
+        this.buildRequest({ ...beer, image_url: imageUrl })
+      );
+
+      Promise.resolve();
+    } catch (error) {
+      Promise.reject();
+    }
+  }
+
+  async uploadImage(imageRef: File) {
+    const storage = getStorage();
+    const mountainImagesRef = ref(
+      storage,
+      `images/${imageRef.name + new Date().getTime()}`
+    );
+    const upload = await uploadBytes(mountainImagesRef, imageRef);
+    console.log('UPLOAD: ', upload);
+    return await getDownloadURL(mountainImagesRef);
   }
 
   private get beerColRef() {
