@@ -22,7 +22,7 @@ import {
 } from '@angular/fire/storage';
 import { IBeerRequest, IBeerRequestBase } from 'src/app/models/beerRequest';
 import { Beer } from 'brewdog-js';
-import { transition } from '@angular/animations';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +32,7 @@ export class ImpactBrewsApiService {
   readonly beerColName = 'beers';
   readonly perPageKey = 'per_page';
 
-  constructor() {}
+  constructor(private toastr: ToastrService) {}
 
   /**
    *
@@ -40,17 +40,22 @@ export class ImpactBrewsApiService {
    * @returns list of beers with a limit
    */
   async getBeers(limit?: number): Promise<IBeer[]> {
-    const q = query(this.beerColRef, orderBy('name'), docLimit(limit ?? 100));
-    const querySnapshot = await getDocs(q);
+    try {
+      const q = query(this.beerColRef, orderBy('name'), docLimit(limit ?? 100));
+      const querySnapshot = await getDocs(q);
 
-    const mapped: IBeer[] = querySnapshot.docs.map((doc) => {
-      return {
-        ...(doc.data() as IBeer),
-        id: doc.id,
-      };
-    });
+      const mapped: IBeer[] = querySnapshot.docs.map((doc) => {
+        return {
+          ...(doc.data() as IBeer),
+          id: doc.id,
+        };
+      });
 
-    return Promise.resolve(mapped);
+      return Promise.resolve(mapped);
+    } catch (error) {
+      this.toastr.error("We couldn't get your beers", 'Something went wrong');
+      return Promise.reject();
+    }
   }
 
   /**
@@ -59,29 +64,39 @@ export class ImpactBrewsApiService {
    * @returns list of beers with a limit
    */
   async searchBeers(searchTerm: string) {
-    const q = query(
-      this.beerColRef,
-      where('searchOptions', 'array-contains', searchTerm.toLocaleLowerCase())
-    );
-    const querySnapshot = await getDocs(q);
+    try {
+      const q = query(
+        this.beerColRef,
+        where('searchOptions', 'array-contains', searchTerm.toLocaleLowerCase())
+      );
+      const querySnapshot = await getDocs(q);
 
-    const mapped: IBeer[] = querySnapshot.docs.map((doc) => {
-      return {
-        ...(doc.data() as IBeer),
-        id: doc.id,
-      };
-    });
+      const mapped: IBeer[] = querySnapshot.docs.map((doc) => {
+        return {
+          ...(doc.data() as IBeer),
+          id: doc.id,
+        };
+      });
 
-    return Promise.resolve(mapped);
+      return Promise.resolve(mapped);
+    } catch (error) {
+      this.toastr.error("We couldn't find your beers", 'Something went wrong');
+      return Promise.reject();
+    }
   }
 
   async getBeer(id: string): Promise<IBeer> {
-    const beer = await getDoc(doc(this.firestore, this.beerColName, id));
+    try {
+      const beer = await getDoc(doc(this.firestore, this.beerColName, id));
 
-    return Promise.resolve({
-      ...(beer.data() as IBeerRequest),
-      id: beer.id,
-    });
+      return Promise.resolve({
+        ...(beer.data() as IBeerRequest),
+        id: beer.id,
+      });
+    } catch (error) {
+      this.toastr.error("We couldn't get your beer", 'Something went wrong');
+      return Promise.reject();
+    }
   }
 
   async addBeer(beer: IBeerRequest, image?: File) {
@@ -94,6 +109,7 @@ export class ImpactBrewsApiService {
 
       Promise.resolve();
     } catch (error) {
+      this.toastr.error("We couldn't add your beer", 'Something went wrong');
       Promise.reject();
     }
   }
