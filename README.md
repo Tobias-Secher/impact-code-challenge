@@ -1,27 +1,23 @@
 # ImpactBrews
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.4.
+Dette er mit udkast til min code challege. Jeg har brugt angular til at bygge siden op med og som database har jeg brugt Firebase til at gemme billeder og nye øl som der bliver oprettet.
+<br />
+<br />
+Arkitekturen jeg har gået med et en komponent baseret kode, hvor hvert område har sit eget komponent, men kan gøre brug af fælles komponenter. Så som liste viewet til at se forskellige øl når man enten kommer frem på forsiden eller søger en øl frem.
+<br />
+<br />
+Udover det, så gør jeg også brug af en service til at håndtere mine kald mod firestore, som håndtere at hente data og at mappe data rigtigt tilbage mod komponenterne.
+<br />
+<br />
+Jeg har brugt https://punkapi.com/documentation/v2 til at berige min firestore database, men det er også muligt selv at kunne oprette en ny øl.
 
-## Development server
+## Hvordan skal projektet startes
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. npm install
+2. npm run start
 
-## Code scaffolding
+Det vil starte siden op i `localhost:4200`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Credit til ting jeg har lånt
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Beer logo: https://fonts.google.com/icons?icon.query=beer
