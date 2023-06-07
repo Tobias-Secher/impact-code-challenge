@@ -4,7 +4,13 @@
 <form class="form-wrapper" [formGroup]="beerForm" (submit)="submit()">
   <div class="form-wrapper__name">
     <label for="name">Beer name</label>
-    <input id="name" placeholder="name" class="input" formControlName="name" />
+    <input
+      id="name"
+      placeholder="name"
+      class="input"
+      formControlName="name"
+      [class.error]="controlHasError('name')"
+    />
   </div>
   <div class="form-wrapper__tagline">
     <label for="tagline">Your tagline</label>
