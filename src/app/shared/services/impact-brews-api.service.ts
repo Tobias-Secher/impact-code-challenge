@@ -130,6 +130,7 @@ export class ImpactBrewsApiService {
       ph: beer.ph,
       image_url: beer.image_url,
       tagline: beer.tagline,
+      firstBrewed: beer.firstBrewed,
       searchOptions: splitter(beer.name),
     };
   }
@@ -142,7 +143,7 @@ export class ImpactBrewsApiService {
     const map: IBeerRequest[] = await (
       await beers.all()
     ).map((beer) => {
-      return this.buildRequest(beer);
+      return this.buildRequest({ ...beer, firstBrewed: beer.first_brewed });
     });
     console.log(map);
     map.forEach(async (b) => {

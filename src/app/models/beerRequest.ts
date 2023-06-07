@@ -9,4 +9,5 @@ export type IBeerRequestBase = {
   image_url: string;
   tagline: string;
   searchOptions: string[];
+  firstBrewed: string;
 };

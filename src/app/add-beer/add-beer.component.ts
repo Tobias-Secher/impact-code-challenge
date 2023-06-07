@@ -26,18 +26,21 @@ export class AddBeerComponent {
 
   submit() {
     if (this.beerForm.valid && this.file) {
-      this.service.addBeer(
-        {
-          name: this.controlValue('name'),
-          abv: this.controlValue('abv'),
-          ibu: this.controlValue('ibu'),
-          ph: this.controlValue('ph'),
-          description: this.controlValue('description'),
-          image_url: '',
-          tagline: this.controlValue('tagline'),
-        },
-        this.file
-      );
+      this.service
+        .addBeer(
+          {
+            name: this.controlValue('name'),
+            abv: this.controlValue('abv'),
+            ibu: this.controlValue('ibu'),
+            ph: this.controlValue('ph'),
+            description: this.controlValue('description'),
+            image_url: '',
+            tagline: this.controlValue('tagline'),
+            firstBrewed: this.controlValue('firstBrewed'),
+          },
+          this.file
+        )
+        .then(() => this.beerForm.reset());
     }
   }
 
