@@ -73,5 +73,7 @@
   <div class="form-wrapper__file">
     <input type="file" (change)="saveFile($event)" />
   </div>
-  <button type="submit" [disabled]="formInvalid">submit</button>
+  <button type="submit" class="form-wrapper__save" [disabled]="formInvalid">
+    Save
+  </button>
 </form>

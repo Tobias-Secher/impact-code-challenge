@@ -61,6 +61,30 @@ p {
   &__file {
     grid-area: file;
   }
+
+  &__save {
+    border: 1px solid shared.$primary_color;
+    background-color: rgba(shared.$primary_color, 0.5);
+    height: 50px;
+    border-radius: 10px;
+    color: shared.$text_color;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    cursor: pointer;
+
+    &:hover:enabled {
+      transition: 100ms;
+      background-color: white;
+      color: shared.$primary_color;
+    }
+
+    &:disabled {
+      cursor: initial;
+      border-color: shared.$text_color;
+      background-color: rgba(shared.$text_color, 0.4);
+      color: white;
+    }
+  }
 }
 
 .input {
