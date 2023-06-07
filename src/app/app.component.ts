@@ -15,8 +15,6 @@ export class AppComponent {
   title = 'impact-brews';
 
   constructor() {
-    console.log('ENTER');
-
     // this.bootstrapBeers()
   }
 
