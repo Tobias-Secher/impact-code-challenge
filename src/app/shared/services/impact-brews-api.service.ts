@@ -11,7 +11,6 @@ import {
   orderBy,
   limit as docLimit,
   where,
-  runTransaction,
 } from '@angular/fire/firestore';
 import {
   getStorage,
@@ -22,7 +21,6 @@ import {
 } from '@angular/fire/storage';
 import { IBeerRequest, IBeerRequestBase } from 'src/app/models/beerRequest';
 import { Beer } from 'brewdog-js';
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -31,8 +29,6 @@ export class ImpactBrewsApiService {
   firestore: Firestore = inject(Firestore);
   readonly beerColName = 'beers';
   readonly perPageKey = 'per_page';
-
-  constructor(private toastr: ToastrService) {}
 
   /**
    *
@@ -53,8 +49,7 @@ export class ImpactBrewsApiService {
 
       return Promise.resolve(mapped);
     } catch (error) {
-      this.toastr.error("We couldn't get your beers", 'Something went wrong');
-      return Promise.reject();
+      return Promise.reject("We couldn't get your beers");
     }
   }
 
@@ -80,8 +75,7 @@ export class ImpactBrewsApiService {
 
       return Promise.resolve(mapped);
     } catch (error) {
-      this.toastr.error("We couldn't find your beers", 'Something went wrong');
-      return Promise.reject();
+      return Promise.reject("We couldn't find your beers");
     }
   }
 
@@ -94,23 +88,20 @@ export class ImpactBrewsApiService {
         id: beer.id,
       });
     } catch (error) {
-      this.toastr.error("We couldn't get your beer", 'Something went wrong');
-      return Promise.reject();
+      return Promise.reject("We couldn't get your beer");
     }
   }
 
   async addBeer(beer: IBeerRequest, image?: File) {
     try {
       const imageUrl = image ? await this.uploadImage(image) : beer.image_url;
-      const newBeer = await addDoc(
+      const addBeer = await addDoc(
         this.beerColRef,
         this.buildRequest({ ...beer, image_url: imageUrl })
       );
-
       Promise.resolve();
     } catch (error) {
-      this.toastr.error("We couldn't add your beer", 'Something went wrong');
-      Promise.reject();
+      Promise.reject("We couldn't add your beer");
     }
   }
 
@@ -121,7 +112,6 @@ export class ImpactBrewsApiService {
       `images/${imageRef.name + new Date().getTime()}`
     );
     const upload = await uploadBytes(mountainImagesRef, imageRef);
-    console.log('UPLOAD: ', upload);
     return await getDownloadURL(mountainImagesRef);
   }
 
