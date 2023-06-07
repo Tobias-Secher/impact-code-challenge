@@ -1,0 +1,88 @@
+@use "../shared/styles/shared.scss" as shared;
+
+h1,
+p {
+  text-align: center;
+}
+
+.form-wrapper {
+  display: grid;
+  grid-template-areas:
+    "name name tagline tagline"
+    "abv ibu ph firstBrewed"
+    "desc desc desc desc"
+    "file file file file";
+  gap: 16px;
+
+  @media (max-width: shared.$breakpoint_md) {
+    grid-template-areas:
+      "name tagline"
+      "abv ibu"
+      "ph firstBrewed"
+      "desc desc"
+      "file file";
+  }
+
+  @media (max-width: shared.$breakpoint_sm) {
+    grid-template-areas:
+      "name"
+      "tagline"
+      "abv"
+      "ibu"
+      "ph"
+      "firstBrewed"
+      "desc"
+      "file";
+  }
+
+  &__name {
+    grid-area: name;
+  }
+
+  &__tagline {
+    grid-area: tagline;
+  }
+
+  &__abv {
+    grid-area: abv;
+  }
+  &__ibu {
+    grid-area: ibu;
+  }
+  &__ph {
+    grid-area: ph;
+  }
+  &__brewed {
+    grid-area: firstBrewed;
+  }
+  &__description {
+    grid-area: desc;
+  }
+  &__file {
+    grid-area: file;
+  }
+}
+
+.input {
+  @include shared.input();
+  width: 100%;
+  max-width: 100%;
+  min-width: 20px;
+  margin-top: 8px;
+  border: 1px solid transparent;
+
+  &:focus {
+    border-color: shared.$primary_color;
+  }
+}
+
+.textarea {
+  padding-top: 8px;
+  min-height: 200px;
+  resize: vertical;
+}
+
+label {
+  padding-left: 32px;
+  cursor: pointer;
+}
