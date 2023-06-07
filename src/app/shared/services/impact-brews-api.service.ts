@@ -10,6 +10,7 @@ import {
   doc,
   orderBy,
   limit as docLimit,
+  where,
 } from '@angular/fire/firestore';
 import { IBeerRequest } from 'src/app/models/beerRequest';
 import { Beer } from 'brewdog-js';
@@ -31,6 +32,28 @@ export class ImpactBrewsApiService {
    */
   async getBeers(limit?: number): Promise<IBeer[]> {
     const q = query(this.beerColRef, orderBy('name'), docLimit(limit ?? 100));
+    const querySnapshot = await getDocs(q);
+
+    const mapped: IBeer[] = querySnapshot.docs.map((doc) => {
+      return {
+        ...(doc.data() as IBeer),
+        id: doc.id,
+      };
+    });
+
+    return Promise.resolve(mapped);
+  }
+
+  /**
+   *
+   * @param limit defaults to 100
+   * @returns list of beers with a limit
+   */
+  async searchBeers(searchTerm: string) {
+    const q = query(
+      this.beerColRef,
+      where('searchOptions', 'array-contains', searchTerm.toLocaleLowerCase())
+    );
     const querySnapshot = await getDocs(q);
 
     const mapped: IBeer[] = querySnapshot.docs.map((doc) => {
@@ -68,6 +91,14 @@ export class ImpactBrewsApiService {
     const map: IBeerRequest[] = await (
       await beers.all()
     ).map((beer) => {
+      const splitter = (str: string) => {
+        const arr = [];
+        for (let i = 1; i < str.length + 1; i++) {
+          arr.push(str.substring(0, i).toLocaleLowerCase());
+        }
+
+        return arr;
+      };
       return {
         abv: beer.abv,
         description: beer.description,
@@ -76,6 +107,7 @@ export class ImpactBrewsApiService {
         ph: beer.ph,
         image_url: beer.image_url,
         tagline: beer.tagline,
+        searchOptions: splitter(beer.name),
       };
     });
     console.log(map);

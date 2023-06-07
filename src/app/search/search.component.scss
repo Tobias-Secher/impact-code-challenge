@@ -1,0 +1,33 @@
+@use "../shared/styles/shared.scss" as shared;
+
+.wrapper {
+  margin-top: 60px;
+  &__intro-text {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    color: #4c4c4c;
+    letter-spacing: 2px;
+  }
+
+  &__search {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    & input[type="text"] {
+      border: none;
+      outline: none;
+      width: 80%;
+      max-width: 500px;
+      min-width: 200px;
+      height: 50px;
+      border-radius: 30px;
+      text-indent: 30px;
+      font-size: 1.1em;
+      color: #646464;
+      &:focus {
+        color: black;
+      }
+    }
+  }
+}
