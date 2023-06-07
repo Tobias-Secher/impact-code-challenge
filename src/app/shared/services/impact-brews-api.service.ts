@@ -8,6 +8,9 @@ import {
   query,
   getDoc,
   doc,
+  where,
+  orderBy,
+  limit as docLimit,
 } from '@angular/fire/firestore';
 import { IBeerRequest } from 'src/app/models/beerRequest';
 
@@ -27,7 +30,7 @@ export class ImpactBrewsApiService {
    * @returns list of beers with a limit
    */
   async getBeers(limit?: number): Promise<IBeer[]> {
-    const q = query(this.beerColRef);
+    const q = query(this.beerColRef, orderBy('name'), docLimit(limit ?? 100));
     const querySnapshot = await getDocs(q);
 
     const mapped: IBeer[] = querySnapshot.docs.map((doc) => {
