@@ -9,8 +9,28 @@
   grid-template-rows: [title] minmax(25px, 58px);
   gap: 32px;
 
+  @media (max-width: shared.$breakpoint_sm) {
+    grid-template-columns: auto;
+  }
+
+  @media (max-width: shared.$breakpoint_md) {
+    grid-template-areas:
+      "img"
+      "title"
+      "desc";
+    grid-template-rows: auto;
+    grid-template-columns: [img]80%;
+    justify-content: center;
+  }
+
   &__image {
     grid-area: img;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__image-wrapper {
     width: 300px;
     height: 300px;
     background-color: #ebebeb;
@@ -19,6 +39,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: shared.$breakpoint_sm) {
+      width: 80%;
+      min-width: 200px;
+    }
 
     & img {
       height: 100%;
