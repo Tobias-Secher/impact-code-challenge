@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'add',
     component: AddBeerComponent,
   },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
 
 @NgModule({
