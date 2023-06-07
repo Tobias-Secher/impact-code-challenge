@@ -12,7 +12,7 @@ import {
   limit as docLimit,
   where,
 } from '@angular/fire/firestore';
-import { IBeerRequest } from 'src/app/models/beerRequest';
+import { IBeerRequest, IBeerRequestBase } from 'src/app/models/beerRequest';
 import { Beer } from 'brewdog-js';
 
 @Injectable({
@@ -76,11 +76,32 @@ export class ImpactBrewsApiService {
   }
 
   addBeer(beer: IBeerRequest) {
-    addDoc(this.beerColRef, beer);
+    addDoc(this.beerColRef, this.buildRequest(beer));
   }
 
   private get beerColRef() {
     return collection(this.firestore, this.beerColName);
+  }
+
+  private buildRequest(beer: IBeerRequest): IBeerRequestBase {
+    const splitter = (str: string) => {
+      const arr = [];
+      for (let i = 1; i < str.length + 1; i++) {
+        arr.push(str.substring(0, i).toLocaleLowerCase());
+      }
+
+      return arr;
+    };
+    return {
+      abv: beer.abv,
+      description: beer.description,
+      name: beer.name,
+      ibu: beer.ibu,
+      ph: beer.ph,
+      image_url: beer.image_url,
+      tagline: beer.tagline,
+      searchOptions: splitter(beer.name),
+    };
   }
 
   /**
@@ -91,24 +112,7 @@ export class ImpactBrewsApiService {
     const map: IBeerRequest[] = await (
       await beers.all()
     ).map((beer) => {
-      const splitter = (str: string) => {
-        const arr = [];
-        for (let i = 1; i < str.length + 1; i++) {
-          arr.push(str.substring(0, i).toLocaleLowerCase());
-        }
-
-        return arr;
-      };
-      return {
-        abv: beer.abv,
-        description: beer.description,
-        name: beer.name,
-        ibu: beer.ibu,
-        ph: beer.ph,
-        image_url: beer.image_url,
-        tagline: beer.tagline,
-        searchOptions: splitter(beer.name),
-      };
+      return this.buildRequest(beer);
     });
     console.log(map);
     map.forEach(async (b) => {
