@@ -1,0 +1,79 @@
+<h1>Add a new beer</h1>
+<p>Follow the form below to add your own beer to the collection!</p>
+
+<form class="form-wrapper" [formGroup]="beerForm" (submit)="submit()">
+  <div class="form-wrapper__name">
+    <label for="name">Beer name</label>
+    <input id="name" placeholder="name" class="input" formControlName="name" />
+  </div>
+  <div class="form-wrapper__tagline">
+    <label for="tagline">Your tagline</label>
+    <input
+      id="tagline"
+      placeholder="tagline"
+      class="input"
+      formControlName="tagline"
+      [class.error]="controlHasError('tagline')"
+    />
+  </div>
+  <div class="form-wrapper__abv">
+    <label for="abv">Abv</label>
+    <input
+      id="abv"
+      placeholder="Abv %"
+      type="number"
+      class="input"
+      formControlName="abv"
+      [class.error]="controlHasError('abv')"
+    />
+  </div>
+  <div class="form-wrapper__ibu">
+    <label for="ibu">Ibu</label>
+    <input
+      id="ibu"
+      type="number"
+      placeholder="ibu %"
+      class="input"
+      formControlName="ibu"
+      [class.error]="controlHasError('ibu')"
+    />
+  </div>
+  <div class="form-wrapper__ph">
+    <label for="ph">Ph</label>
+    <input
+      id="ph"
+      placeholder="Ph value"
+      type="number"
+      class="input"
+      formControlName="ph"
+      [class.error]="controlHasError('ph')"
+    />
+  </div>
+  <div class="form-wrapper__brewed">
+    <label for="brewed">First brewed</label>
+    <input
+      id="brewed"
+      placeholder="First brew date"
+      class="input"
+      formControlName="firstBrewed"
+      type="date"
+      [class.error]="controlHasError('firstBrewed')"
+    />
+  </div>
+  <div class="form-wrapper__description">
+    <label for="Description">Description</label>
+    <textarea
+      id="description"
+      placeholder="Say something nice about the beer"
+      class="input textarea"
+      formControlName="description"
+      [class.error]="controlHasError('description')"
+    ></textarea>
+  </div>
+  <div class="form-wrapper__file">
+    <input type="file" (change)="saveFile($event)" />
+  </div>
+  <button type="submit" class="form-wrapper__save" [disabled]="formInvalid">
+    Save
+  </button>
+</form>

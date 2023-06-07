@@ -1,4 +1,6 @@
-export interface IBeerRequest {
+export type IBeerRequest = Omit<IBeerRequestBase, 'searchOptions'>;
+
+export type IBeerRequestBase = {
   name: string;
   description: string;
   abv: number;
@@ -7,4 +9,5 @@ export interface IBeerRequest {
   image_url: string;
   tagline: string;
   searchOptions: string[];
-}
+  firstBrewed: string;
+};

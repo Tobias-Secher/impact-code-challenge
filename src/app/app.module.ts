@@ -13,6 +13,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { SearchComponent } from './search/search.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddBeerComponent } from './add-beer/add-beer.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BeerOverviewComponent,
     DetailComponent,
     SearchComponent,
+    AddBeerComponent,
   ],
   imports: [
     BrowserModule,
