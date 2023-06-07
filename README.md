@@ -10,6 +10,9 @@ Udover det, så gør jeg også brug af en service til at håndtere mine kald mod
 <br />
 <br />
 Jeg har brugt https://punkapi.com/documentation/v2 til at berige min firestore database, men det er også muligt selv at kunne oprette en ny øl.
+<br />
+<br />
+Jeg har bygget min sccs op med en shared fil hvor jeg har gemt globale værdier i, som breakpoints, faver og mixin funktion. Det har jeg gjort så at der bliver brugt de samme værdier rund i hele min scss, så skulle der være ændringer til det, så er det samlet et sted. Udover det så har jeg brugt BEM som min methodology, så navngivningen er ens og det er nemmere at finde en style og ændre den.
 
 ## Hvordan skal projektet startes
 
