@@ -12,6 +12,7 @@ import {
   limit as docLimit,
 } from '@angular/fire/firestore';
 import { IBeerRequest } from 'src/app/models/beerRequest';
+import { Beer } from 'brewdog-js';
 
 @Injectable({
   providedIn: 'root',
@@ -57,5 +58,28 @@ export class ImpactBrewsApiService {
 
   private get beerColRef() {
     return collection(this.firestore, this.beerColName);
+  }
+
+  /**
+   * Used to setup base line for beers. ONLY USE ONCE
+   */
+  async bootstrapBeers() {
+    const beers = new Beer();
+    const map: IBeerRequest[] = await (
+      await beers.all()
+    ).map((beer) => {
+      return {
+        abv: beer.abv,
+        description: beer.description,
+        name: beer.name,
+        ibu: beer.ibu,
+        ph: beer.ph,
+        image_url: beer.image_url,
+      };
+    });
+    console.log(map);
+    map.forEach(async (b) => {
+      await this.addBeer(b);
+    });
   }
 }
