@@ -10,7 +10,11 @@
   display: grid;
   grid-template-areas: "logo title menu";
   grid-template-columns: fit-content(100px) fit-content(150px) auto;
-  color: #424242;
+  color: shared.$text_color;
+  @media (max-width: shared.$breakpoint_sm) {
+    grid-template-areas: "logo menu";
+    grid-template-columns: fit-content(100px) auto;
+  }
 
   &__logo {
     grid-area: logo;
@@ -49,6 +53,9 @@
     display: flex;
     align-content: center;
     justify-content: center;
+    @media (max-width: shared.$breakpoint_sm) {
+      justify-content: left;
+    }
     & ul {
       padding: 0;
       margin: 0;
@@ -59,12 +66,17 @@
         display: flex;
         align-items: center;
         padding: 0 16px;
-
+        @media (max-width: shared.$breakpoint_sm) {
+          padding: 0 8px;
+        }
         & a {
           color: inherit;
           font-size: 1.2em;
           text-decoration: none;
           position: relative;
+          @media (max-width: shared.$breakpoint_sm) {
+            font-size: 1em;
+          }
 
           &:hover::after {
             content: " ";
