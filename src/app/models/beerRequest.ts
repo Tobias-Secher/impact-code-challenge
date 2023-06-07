@@ -6,4 +6,5 @@ export interface IBeerRequest {
   ph: number;
   image_url: string;
   tagline: string;
+  searchOptions: string[];
 }

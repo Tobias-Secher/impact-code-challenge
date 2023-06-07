@@ -1,18 +1,15 @@
 <div class="wrapper">
   <h1 class="wrapper__intro-text">Keep track of your favorite beers!</h1>
-  <form
-    class="wrapper__search"
-    (submit)="searchSubmit()"
-    [formGroup]="searchForm"
-  >
+  <form class="wrapper__search" [formGroup]="searchForm">
     <input
       type="text"
-      class="search"
       placeholder="Search for your beer"
       formControlName="searchTerm"
+      class="search"
     />
   </form>
 </div>
-<ng-container *ngIf="beers$ | async as beers">
+<ng-container *ngIf="beers.length > 0; else noBeers">
   <app-beer-overview [beers]="beers"></app-beer-overview>
 </ng-container>
+<ng-template #noBeers> No beers was found... </ng-template>
