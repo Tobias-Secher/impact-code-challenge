@@ -8,7 +8,6 @@ import {
   query,
   getDoc,
   doc,
-  where,
   orderBy,
   limit as docLimit,
 } from '@angular/fire/firestore';
