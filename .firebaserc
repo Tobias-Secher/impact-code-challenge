@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "impact-635e1": {
+      "hosting": {
+        "impact-brews": [
+          "impact-635e1"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "impact-635e1"
+  }
+}
